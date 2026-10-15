@@ -1,0 +1,93 @@
+<ion-content [fullscreen]="true" class="pilahin-auth-bg">
+  <div class="auth-container">
+    <div class="logo-badge-wrap" aria-hidden="true">
+      <div class="mini-eco-logo">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <circle cx="60" cy="60" r="54" fill="#EAF6F0"/>
+          <path d="M28 66 C23 40, 42 22, 66 24" stroke="#1DA1F2" stroke-width="9" stroke-linecap="round"/>
+          <polygon points="64,13 82,25 62,35" fill="#1DA1F2"/>
+          <path d="M92 54 C97 80, 78 98, 54 96" stroke="#22AD5C" stroke-width="9" stroke-linecap="round"/>
+          <polygon points="56,107 38,95 58,85" fill="#22AD5C"/>
+          <path d="M46 74 C45 55, 58 44, 74 45 C73 61, 63 74, 46 74 Z" fill="#22AD5C"/>
+          <path d="M46 74 C45 55, 58 44, 74 45 C60 54, 53 63, 46 74 Z" fill="#1DA1F2"/>
+        </svg>
+        <div class="leaf-corner-badge"><ion-icon name="leaf"></ion-icon></div>
+      </div>
+    </div>
+
+    <div class="header-text">
+      <p class="brand">Pilahin</p>
+      <h1>Selamat Datang Kembali</h1>
+      <p>Masuk untuk melanjutkan aktivitasmu bersama Pilahin.</p>
+    </div>
+
+    <form class="auth-card" #loginForm="ngForm" (ngSubmit)="prosesMasuk(loginForm)" novalidate
+      [attr.aria-busy]="sedangMasuk()">
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <div class="input-box" [class.invalid]="email.invalid && (email.touched || loginForm.submitted)">
+          <ion-icon name="mail-outline" class="prefix-icon" aria-hidden="true"></ion-icon>
+          <input id="login-email" name="email" type="email" inputmode="email"
+            autocomplete="username" autocapitalize="none" [spellcheck]="false"
+            enterkeyhint="next" placeholder="nama@email.com" required email maxlength="150"
+            [ngModel]="formLogin.email" (ngModelChange)="ubahEmail($event)" #email="ngModel"
+            [readonly]="sedangMasuk()"
+            [attr.aria-invalid]="email.invalid && (email.touched || loginForm.submitted) ? 'true' : null"
+            [attr.aria-describedby]="email.invalid && (email.touched || loginForm.submitted) ? 'email-error' : null" />
+        </div>
+        @if (email.invalid && (email.touched || loginForm.submitted)) {
+          <p id="email-error" class="field-error" aria-live="polite">
+            {{ email.errors?.['required'] ? 'Email wajib diisi.' : 'Masukkan alamat email yang valid.' }}
+          </p>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="login-password">Kata Sandi</label>
+        <div class="input-box" [class.invalid]="password.invalid && (password.touched || loginForm.submitted)">
+          <ion-icon name="lock-closed-outline" class="prefix-icon" aria-hidden="true"></ion-icon>
+          <input id="login-password" name="password" [type]="tampilkanSandi() ? 'text' : 'password'"
+            autocomplete="current-password" enterkeyhint="go" placeholder="Masukkan kata sandi" required
+            [(ngModel)]="formLogin.password" (ngModelChange)="pesanError.set('')" #password="ngModel"
+            [readonly]="sedangMasuk()"
+            [attr.aria-invalid]="password.invalid && (password.touched || loginForm.submitted) ? 'true' : null"
+            [attr.aria-describedby]="password.invalid && (password.touched || loginForm.submitted) ? 'password-error' : null" />
+          <button type="button" class="password-toggle" [disabled]="sedangMasuk()"
+            [attr.aria-label]="tampilkanSandi() ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'"
+            [attr.aria-pressed]="tampilkanSandi()" aria-controls="login-password"
+            (click)="tampilkanSandi.set(!tampilkanSandi())">
+            <ion-icon [name]="tampilkanSandi() ? 'eye-off-outline' : 'eye-outline'" aria-hidden="true"></ion-icon>
+          </button>
+        </div>
+        @if (password.invalid && (password.touched || loginForm.submitted)) {
+          <p id="password-error" class="field-error" aria-live="polite">Kata sandi wajib diisi.</p>
+        }
+      </div>
+
+      @if (pesanError()) {
+        <p class="submit-error" role="alert">{{ pesanError() }}</p>
+      }
+
+      <ion-button type="submit" expand="block" class="btn-submit" [disabled]="sedangMasuk()">
+        @if (sedangMasuk()) {
+          <ion-spinner name="crescent" aria-hidden="true"></ion-spinner>
+          <span>Sedang masuk...</span>
+        } @else {
+          <span>Masuk ke Akun</span>
+          <ion-icon name="arrow-forward-outline" slot="end" aria-hidden="true"></ion-icon>
+        }
+      </ion-button>
+      <span class="sr-only" role="status">{{ sedangMasuk() ? 'Memproses permintaan masuk.' : '' }}</span>
+    </form>
+
+    <p class="account-note">Pelanggan, pengelola, dan petugas mitra masuk menggunakan akun masing-masing.</p>
+    <div class="bottom-redirect">
+      <span>Belum punya akun pelanggan?</span>
+      @if (sedangMasuk()) {
+        <span class="registration-disabled" aria-disabled="true">Daftar Sekarang</span>
+      } @else {
+        <a routerLink="/register">Daftar Sekarang</a>
+      }
+    </div>
+  </div>
+</ion-content>

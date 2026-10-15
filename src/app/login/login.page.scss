@@ -1,0 +1,243 @@
+.pilahin-auth-bg {
+  --background: #f4fbf7;
+  --color: #111827;
+}
+
+.auth-container {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: calc(28px + var(--ion-safe-area-top, 0px)) 20px calc(24px + var(--ion-safe-area-bottom, 0px));
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo-badge-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+
+  .mini-eco-logo {
+    position: relative;
+    width: 72px;
+    height: 72px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 12px rgba(34, 173, 92, 0.15));
+    }
+
+    .leaf-corner-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #22ad5c;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      border: 2px solid #fff;
+    }
+  }
+}
+
+.header-text {
+  text-align: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #111827;
+    margin: 8px 0;
+  }
+
+  p {
+    font-size: 14px;
+    color: #52635a;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 290px;
+  }
+
+  .brand {
+    color: #17713d;
+    font-size: 18px;
+    font-weight: 800;
+  }
+}
+
+.auth-card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 20px 18px;
+  box-shadow: 0 10px 28px rgba(20, 83, 45, 0.05);
+
+  .form-group {
+    margin-bottom: 18px;
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 8px;
+    }
+
+    .input-box {
+      display: flex;
+      align-items: center;
+      background: #eef2ef;
+      border-radius: 12px;
+      padding: 0 10px;
+      min-height: 50px;
+      border: 1.5px solid transparent;
+
+      &:focus-within {
+        border-color: #17713d;
+        background: #f9fdfb;
+      }
+
+      &.invalid {
+        border-color: #b42318;
+      }
+
+      .prefix-icon {
+        flex-shrink: 0;
+        font-size: 18px;
+        color: #52635a;
+        margin-right: 10px;
+      }
+
+      input {
+        flex: 1;
+        min-width: 0;
+        width: 100%;
+        min-height: 46px;
+        border: none;
+        background: transparent;
+        outline: none;
+        font-size: 16px;
+        color: #111827;
+
+        &::placeholder {
+          color: #647169;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .password-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    min-height: 44px;
+    margin-right: -8px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #52635a;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .btn-submit {
+    --background: #18843f;
+    --background-activated: #146c34;
+    --background-hover: #17713d;
+    --color: #fff;
+    --border-radius: 14px;
+    --box-shadow: 0 6px 16px rgba(34, 173, 92, 0.2);
+    min-height: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: none;
+    margin: 0;
+
+    ion-spinner {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.field-error,
+.submit-error {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #b42318;
+  margin: 6px 0 0;
+}
+
+.submit-error {
+  background: #fff2f0;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 0 0 16px;
+}
+
+.account-note {
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+  color: #52635a;
+  margin: 18px 12px 0;
+}
+
+.bottom-redirect {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #52635a;
+
+  a,
+  .registration-disabled {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 6px;
+    color: #066c9a;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .registration-disabled {
+    opacity: 0.6;
+    text-decoration: none;
+  }
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #17713d;
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-height: 600px) {
+  .auth-container {
+    justify-content: flex-start;
+  }
+}
